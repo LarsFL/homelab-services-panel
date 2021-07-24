@@ -1,0 +1,20 @@
+[
+    {
+        "title": "Minecraft server",
+        "description": "The multiverse minecraft server",
+        "logo": "/pictures/minecraft.png",
+        "color": "green"
+    },
+    {
+        "title": "ARK server",
+        "description": "The ARK Survival Evolved server",
+        "logo": "/pictures/ark.png",
+        "color": "darkgreen"
+    },
+    {
+        "title": "Jellyfin",
+        "description": "Streaming service for movies and series",
+        "logo": "/pictures/jellyfin.png",
+        "color": "violet"
+    }
+]
