@@ -1,19 +1,44 @@
 /* eslint-disable react/prop-types */
-import { makeStyles, CardContent, Typography, CardMedia, Card }
+import { makeStyles, CardContent, Typography, CardMedia, Card, Popover, Button }
   from '@material-ui/core';
 import React from 'react';
+import { PowerSettingsNew } from '@material-ui/icons';
 
 export const ServiceItem = ({ data }) => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const statusColor = (status) => {
+    if (status === 'active') {
+      return 'green';
+    } else if (status === 'off') {
+      return 'red';
+    } else if (status === 'restarting') {
+      return 'orange';
+    }
+    return 'black';
+  };
+
+  const handlePopoverOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
   const useStyles = makeStyles(() => ({
     serviceImage: {
       aspectRatio: '1/1',
       display: 'flex',
-      width: 125,
-      height: 125,
+      width: 100,
+      height: 100,
     },
     root: {
       display: 'flex',
-      padding: '20px',
+      paddingLeft: '20px',
+      paddingRight: '20px',
+      paddingTop: '10px',
+      paddingBottom: '10px',
       margin: '20px',
       width: 500,
       backgroundColor: `${data.color}`,
@@ -21,9 +46,39 @@ export const ServiceItem = ({ data }) => {
     details: {
       display: 'flex',
       flexDirection: 'column',
+      flexGrow: 1,
     },
     content: {
       flex: '1 0 auto',
+      paddingBottom: '0px!important',
+      paddingTop: '0px!important',
+    },
+    icon: {
+      fontSize: 30,
+      color: statusColor(data.status),
+      marginTop: 'auto',
+      marginBottom: 'auto',
+      marginLeft: '5px',
+      backgroundColor: 'rgba(0, 0, 0, .2)',
+      borderRadius: '5px',
+    },
+    titleWrapper: {
+      display: 'flex',
+      flex: '1 0 auto',
+      flexDirection: 'row',
+    },
+    popover: {
+      pointerEvents: 'none',
+    },
+    firstButton: {
+      marginRight: '20px',
+    },
+    secondButton: {
+      right: 0,
+    },
+    buttonWrapper: {
+      display: 'flex',
+      justifyContent: 'flex-end',
     },
   }));
 
@@ -37,12 +92,51 @@ export const ServiceItem = ({ data }) => {
       />
       <div className={classes.details}>
         <CardContent className={classes.content}>
-          <Typography component="h4" variant="h4" align="left">
-            {data.title}
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
+          <div className={classes.titleWrapper}>
+            <Typography component="h4" variant="h4" align="left">
+              {data.title}
+            </Typography>
+            <PowerSettingsNew className={classes.icon}
+              aria-owns={open ? 'mouse-over-popover' : undefined}
+              aria-haspopup="true"
+              onMouseEnter={handlePopoverOpen}
+              onMouseLeave={handlePopoverClose}
+            />
+            <Popover
+              id={'popover' + data.title}
+              className={classes.popover}
+              classes={{
+                paper: classes.paper,
+              }}
+              open={open}
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'center',
+              }}
+              transformOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center',
+              }}
+              onClose={handlePopoverClose}
+              disableRestoreFocus
+            >
+              <Typography>Uptime: 2 days</Typography>
+            </Popover>
+          </div>
+          <Typography variant="subtitle1" color="textSecondary" align="left">
             {data.description}
           </Typography>
+          <div className={classes.buttonWrapper}>
+            <Button variant="contained" color="secondary"
+              className={classes.firstButton}>
+              Start
+            </Button>
+            <Button variant="contained" color="secondary"
+              className={classes.secondButton}>
+              Restart
+            </Button>
+          </div>
         </CardContent>
       </div>
     </Card>

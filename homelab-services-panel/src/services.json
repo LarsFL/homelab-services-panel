@@ -1,20 +1,23 @@
 [
     {
         "title": "Minecraft server",
-        "description": "The multiverse minecraft server",
+        "description": "The multiverse minecraft server text text",
         "logo": "/pictures/minecraft.png",
-        "color": "green"
+        "color": "green",
+        "status": "off"
     },
     {
         "title": "ARK server",
         "description": "The ARK Survival Evolved server",
         "logo": "/pictures/ark.png",
-        "color": "darkgreen"
+        "color": "darkgreen",
+        "status": "active"
     },
     {
         "title": "Jellyfin",
         "description": "Streaming service for movies and series",
         "logo": "/pictures/jellyfin.png",
-        "color": "violet"
+        "color": "violet",
+        "status": "restarting"
     }
 ]

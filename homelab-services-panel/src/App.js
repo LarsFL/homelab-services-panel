@@ -29,7 +29,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div className="App">
+      <div className="App" style={{ overflowX: 'clip' }}>
         <Header />
         <ServiceGrid />
       </div>
