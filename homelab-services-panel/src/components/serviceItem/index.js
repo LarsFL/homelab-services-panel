@@ -3,9 +3,11 @@ import { makeStyles, CardContent, Typography, CardMedia, Card, Popover, Button }
   from '@material-ui/core';
 import React from 'react';
 import { PowerSettingsNew } from '@material-ui/icons';
+import { ServiceLog } from '../serviceLog';
 
 export const ServiceItem = ({ data }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [isLogOpen, setIsLogOpen] = React.useState(false);
   const open = Boolean(anchorEl);
   const statusColor = (status) => {
     if (status === 'active') {
@@ -26,6 +28,10 @@ export const ServiceItem = ({ data }) => {
     setAnchorEl(null);
   };
 
+  const handleOpenLogs = () => {
+    setIsLogOpen(true);
+  };
+
   const useStyles = makeStyles(() => ({
     serviceImage: {
       aspectRatio: '1/1',
@@ -35,8 +41,8 @@ export const ServiceItem = ({ data }) => {
     },
     root: {
       display: 'flex',
-      paddingLeft: '20px',
-      paddingRight: '20px',
+      paddingLeft: '10px',
+      paddingRight: '10px',
       paddingTop: '10px',
       paddingBottom: '10px',
       margin: '20px',
@@ -52,6 +58,7 @@ export const ServiceItem = ({ data }) => {
       flex: '1 0 auto',
       paddingBottom: '0px!important',
       paddingTop: '0px!important',
+      paddingRight: '0px!important',
     },
     icon: {
       fontSize: 30,
@@ -71,7 +78,7 @@ export const ServiceItem = ({ data }) => {
       pointerEvents: 'none',
     },
     firstButton: {
-      marginRight: '20px',
+      marginRight: '10px',
     },
     secondButton: {
       right: 0,
@@ -86,6 +93,7 @@ export const ServiceItem = ({ data }) => {
 
   return (
     <Card className={classes.root}>
+      <ServiceLog data={data} isOpen={isLogOpen} setOpen={setIsLogOpen} />
       <CardMedia
         className={classes.serviceImage}
         image={data.logo}
@@ -128,14 +136,22 @@ export const ServiceItem = ({ data }) => {
             {data.description}
           </Typography>
           <div className={classes.buttonWrapper}>
-            <Button variant="contained" color="secondary"
-              className={classes.firstButton}>
-              Start
-            </Button>
-            <Button variant="contained" color="secondary"
-              className={classes.secondButton}>
-              Restart
-            </Button>
+            {data.status !== 'off' &&
+              <>
+                <Button variant="contained" color="primary"
+                  className={classes.firstButton}>
+                  Stop
+                </Button>
+                <Button variant="contained" color="secondary"
+                  className={classes.secondButton}>
+                  Restart
+                </Button>
+              </>||
+              <Button variant="contained" color="primary"
+                className={classes.secondButton} onClick={handleOpenLogs}>
+                Start
+              </Button>
+            }
           </div>
         </CardContent>
       </div>

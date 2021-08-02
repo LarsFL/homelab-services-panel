@@ -21,8 +21,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Header = () => {
+export const Header = ({ setSearchTerm }) => {
   const classes = useStyles();
+
+  const handleSearchUpdate = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   const displayDesktop = () => {
     return (
       <Toolbar className={classes.toolbar}>
@@ -32,7 +37,8 @@ export const Header = () => {
         <InputBase
           placeholder="Search.."
           className={classes.headerSearch}
-          inputProps={{ 'aria-label': 'search' }} />
+          inputProps={{ 'aria-label': 'search' }}
+          onChange={handleSearchUpdate} />
       </Toolbar>
     );
   };

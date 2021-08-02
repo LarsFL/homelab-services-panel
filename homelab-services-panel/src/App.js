@@ -26,12 +26,13 @@ const theme = createTheme({
 
 // eslint-disable-next-line require-jsdoc
 function App() {
+  const [searchTerm, setSearchTerm] = React.useState('');
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className="App" style={{ overflowX: 'clip' }}>
-        <Header />
-        <ServiceGrid />
+        <Header setSearchTerm={setSearchTerm}/>
+        <ServiceGrid searchTerm={searchTerm} />
       </div>
     </ThemeProvider>
   );

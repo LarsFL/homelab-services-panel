@@ -4,7 +4,7 @@ import { Grid } from '@material-ui/core';
 import { ServiceItem } from '../serviceItem';
 import data from '../../services.json';
 
-export const ServiceGrid = () => {
+export const ServiceGrid = ({ searchTerm }) => {
   return (
     <Grid
       container
@@ -13,9 +13,12 @@ export const ServiceGrid = () => {
       alignItems="center">
       <Grid item xs={12}>
         <Grid container justifyContent='center' spacing={5}>
-          {data.map((value, inc) => (
+          {data.filter((value) => {
+            return value.title.toLowerCase()
+                .includes(searchTerm.toLowerCase());
+          }).map((value, inc) => (
             <Grid key={inc} item>
-              <ServiceItem data={value}/>
+              <ServiceItem data={value} />
             </Grid>
           ))}
         </Grid>

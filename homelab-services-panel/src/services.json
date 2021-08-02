@@ -1,13 +1,13 @@
 [
     {
-        "title": "Minecraft server",
+        "title": "Minecraft",
         "description": "The multiverse minecraft server text text",
         "logo": "/pictures/minecraft.png",
         "color": "green",
         "status": "off"
     },
     {
-        "title": "ARK server",
+        "title": "ARK",
         "description": "The ARK Survival Evolved server",
         "logo": "/pictures/ark.png",
         "color": "darkgreen",
