@@ -129,7 +129,7 @@ export const ServiceItem = ({ data }) => {
               onClose={handlePopoverClose}
               disableRestoreFocus
             >
-              <Typography>Uptime: 2 days</Typography>
+              <Typography> Uptime: 2 days </Typography>
             </Popover>
           </div>
           <Typography variant="subtitle1" color="textSecondary" align="left">
@@ -139,6 +139,10 @@ export const ServiceItem = ({ data }) => {
             {data.status !== 'off' &&
               <>
                 <Button variant="contained" color="primary"
+                  className={classes.firstButton} onClick={handleOpenLogs}>
+                  Status
+                </Button>
+                <Button variant="contained" color="primary"
                   className={classes.firstButton}>
                   Stop
                 </Button>
@@ -146,11 +150,17 @@ export const ServiceItem = ({ data }) => {
                   className={classes.secondButton}>
                   Restart
                 </Button>
-              </>||
-              <Button variant="contained" color="primary"
-                className={classes.secondButton} onClick={handleOpenLogs}>
-                Start
-              </Button>
+              </> ||
+              <>
+                <Button variant="contained" color="primary"
+                  className={classes.firstButton} onClick={handleOpenLogs}>
+                  Status
+                </Button>
+                <Button variant="contained" color="secondary"
+                  className={classes.secondButton}>
+                  Start
+                </Button>
+              </>
             }
           </div>
         </CardContent>

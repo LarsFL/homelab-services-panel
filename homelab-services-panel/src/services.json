@@ -19,5 +19,12 @@
         "logo": "/pictures/jellyfin.png",
         "color": "violet",
         "status": "restarting"
+    },
+    {
+        "title": "Home Assistant",
+        "description": "Smart home control software",
+        "logo": "/pictures/homeassistant.png",
+        "color": "teal",
+        "status": "active"
     }
 ]
